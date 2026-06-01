@@ -24,5 +24,6 @@ data_analyst_agent = Agent(
             ),
     llm=llm,
     tools=[FileReadTool()],
-    verbose=True,
+    max_iter=3,
+    verbose=False
 )

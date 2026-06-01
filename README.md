@@ -1,79 +1,111 @@
-📌 AI Research Assistant with CrewAI
+# 📌 AI Research Assistant with CrewAI
 
-A multi-agent AI research assistant built with CrewAI, Streamlit, and Groq LLMs, designed to autonomously research topics, analyze data, and generate reports.
+A multi-agent AI research assistant built with CrewAI and Streamlit, designed to autonomously research topics, analyze data, and generate high-quality reports.
 
-🔍 Features
+## 🔍 Features
 
-🧠 Multi-Agent System using CrewAI:
+- **🧠 Multi-Agent System using CrewAI:**
+    - **Research Specialist:** Gathers comprehensive information from multiple online sources.
+    - **Data Analyst:** Processes, filters, and analyzes research findings to identify key insights.
+    - **Content Writer:** Synthesizes the analysis into a structured and professional final report.
+- **📝 Automated Research Workflow:** A seamless pipeline from a single topic input to a complete final report.
+- **🌐 Streamlit Frontend:** An intuitive web interface for triggering research and viewing results.
+- **🔑 Environment-Based Configuration:** Flexible LLM and API key management via `.env`.
+- **📄 Exportable Reports:** Research findings, analysis, and final reports are available in Markdown format.
 
-Research Specialist: Gathers information from multiple sources.
+## 🛠 Tech Stack
 
-Data Analyst: Processes and analyzes research findings.
+- **CrewAI** – Multi-agent orchestration and task management
+- **LiteLLM / Groq** – High-performance LLM backend
+- **Streamlit** – Web application framework
+- **Python 3.10+** – Programming language
+- **Serper.dev** – Search API for real-time web research
+- **python-dotenv** – Environment variable management
 
-Content Writer: Generates detailed reports.
+## 📂 Project Structure
 
-📝 Automated Research Workflow: From topic input to final report.
+```text
+.
+├── agents/                 # Agent definitions
+│   ├── content_writer.py   # Content Writer agent configuration
+│   ├── data_analyst.py     # Data Analyst agent configuration
+│   └── research_specialist.py # Research Specialist agent configuration
+├── tasks/                  # Task definitions
+│   ├── analysis_task.py    # Data analysis and insight extraction task
+│   ├── research_task.py    # Information gathering task
+│   └── writing_task.py     # Final report synthesis task
+├── app.py                  # Streamlit web application (UI)
+├── crew.py                 # Crew orchestration (connects agents & tasks)
+├── main.py                 # CLI entry point for running research
+├── requirements.txt        # Project dependencies
+└── .env                    # API keys and LLM configurations (not tracked by git)
+```
 
-🌐 Streamlit Frontend: Easy-to-use web interface for research tasks.
+## ⚙️ Workflow
 
-🔑 Environment-Based Configuration: Securely store API keys in a .env file.
+The project follows a sequential pipeline where each agent's output becomes the input for the next.
 
-📄 Exportable Reports: Download research, analysis, and final reports in Markdown.
+```mermaid
+graph TD
+    A[User Input: Topic] --> B[Research Specialist Agent]
+    B --> C{Research Task}
+    C -->|Research Findings| D[Data Analyst Agent]
+    D --> E{Analysis Task}
+    E -->|Analyzed Insights| F[Content Writer Agent]
+    F --> G{Writing Task}
+    G --> H[Final Research Report]
 
-🛠 Tech Stack
+    subgraph "CrewAI Orchestration"
+    B
+    C
+    D
+    E
+    F
+    G
+    end
+```
 
-CrewAI – Multi-agent orchestration
+## 🚀 Getting Started
 
-LiteLLM / Groq – Language model backend
-
-Streamlit – Web application frontend
-
-Python 3.10+ – Programming language
-
-dotenv – Environment variable management
-
-🚀 Getting Started
-1️⃣ Clone the repository
+### 1️⃣ Clone the repository
+```bash
 git clone https://github.com/your-username/ai-research-assistant.git
 cd ai-research-assistant
-2️⃣ Install dependencies
+```
+
+### 2️⃣ Install dependencies
+```bash
 pip install -r requirements.txt
-3️⃣ Create .env file
+```
 
-Create a .env in the project root with your API keys:
-
+### 3️⃣ Configure Environment Variables
+Create a `.env` file in the project root:
+```env
 SERPER_API_KEY=your_serper_api_key
 GROQ_API_KEY=your_groq_api_key
-WRITER_AGENT_LLM=llama-3.3-70b-versatile
-4️⃣ Run the app
+RESEARCH_AGENT_LLM=llama-3.3-70b-versatile
+RESEARCH_AGENT_TEMPERATURE=0.3
+# Add other agent LLM configs as needed
+```
+
+### 4️⃣ Run the Application
+
+**Via Web Interface (Streamlit):**
+```bash
 streamlit run app.py
-📝 Usage
+```
 
-Enter a research topic in the Streamlit input box.
+**Via Command Line:**
+```bash
+python main.py
+```
 
-Click Start Research.
+## 📝 Usage
 
-The agents will:
-
-🔍 Gather research data
-
-📊 Analyze results
-
-✍️ Generate a final report
-
-View and download the results from tabs for:
-
-Research Findings
-
-Analysis Report
-
-Final Report
-
-⚙️ Configuration
-
-Ensure all API keys are valid and set in .env.
-
-Agent models are defined in agents/ folder.
-
-Tasks are defined in tasks/ folder.
-
+1. **Enter a research topic** in the Streamlit input box (e.g., "The impact of Quantum Computing on Cybersecurity").
+2. **Click "Start Research"**.
+3. **Monitor Progress:** The agents will autonomously:
+    - 🔍 Gather real-time web data.
+    - 📊 Analyze and structure the information.
+    - ✍️ Draft a comprehensive report.
+4. **Review Results:** Switch between tabs to view **Research Findings**, **Analysis Report**, and the **Final Report**.

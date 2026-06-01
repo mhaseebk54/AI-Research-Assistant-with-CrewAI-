@@ -19,5 +19,6 @@ def get_research_crew():
             analysis_task,
             writing_task,
         ],
-        verbose=True
+        verbose=False,
+        max_rpm=5
     )

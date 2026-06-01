@@ -24,5 +24,6 @@ content_writer_agent = Agent(
             ),
     llm=llm,
     tools=[FileWriterTool()],
-    verbose=True,
+    max_iter=3,
+    verbose=False
 )

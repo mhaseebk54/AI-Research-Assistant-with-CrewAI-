@@ -24,5 +24,6 @@ research_specialist_agent = Agent(
             ),
     llm=llm,
     tools=[SerperDevTool()],
-    verbose=True,
+    max_iter=3,
+    verbose=False
 )
